@@ -23,6 +23,7 @@
             model.then(model => {
                 let result = model.predict(inputTensor);
                 result = result.round().dataSync()[0];
+                alert(result)
                 alert(result ? "plus" : "minus");
 
             });
