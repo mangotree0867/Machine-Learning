@@ -7,7 +7,7 @@
     <script>
 
         async function load() {
-            const url = 'https://mangotree0867.github.io/MachineLearningFoundations/tensorflow_js/model.json';
+            const url = 'https://mangotree0867.github.io/Machine-Learning/XOR_model/XORmodel_1/model.json';
             const model = await tf.loadLayersModel(url);
             return model;
         };
@@ -23,7 +23,7 @@
                 let result = model.predict(inputTensor);
                 result = result.round().dataSync()[0];
                 alert(result);
-                alert(result ? "odd" : "even");
+                alert(result ? "plus" : "minus");
 
             });
         };
