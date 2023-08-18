@@ -1,0 +1,70 @@
+1. Tokenization
+- setting words to numbers so that the model can analyze it
+
+- Tokenizer api
+tokenizer = Tokenizer(num_words = 100)
+tokenizer.fit_on_texts(sentences)
+word_index = tokenizer.word_index
+
+after tokenizing you need to sequence the words
+
+2. Sequencing
+- Puts the sentences in  order using the tokens.
+- You can use phrases that you wouldn't normally see and tokenize 
+  them so that you can still get the length of a sentence
+
+- sequences = tokenizer.texts_to_sequences
+- padded sequence -> used to have same length for all sentences
+ 		  -> can have maxlen
+		  -> or cut it according to how you want it
+
+3. Sentiment Recognization
+- tokenize -> sequence -> pad -> slice them to train, test set -> embedding
+- make sure that tokenizer is only fit to the training data (make sure it doesn't see the test data)
+- sequence train and test seperately
+
+  Embedding
+- make the words into vectors so that it can kind of understand the meaning
+eg) good -> (1,0) / bad -> (-1,0) / okay -> (0, 0.5) / Meh(-0.4, 0.7) / Not bad(0.5 , 0.7)
+- tf.keras.layers.Embedding(vocab_size, embedding_dum, input_length = max_length)
+
+Establishing sentiment for new sentences
+1. use training set tokenizer on the new sentences
+2. pad those sequences so that it is the same dimension as those in the training set and use same padding type
+3. predict on the padded set
+
+4. RNN
+ - needs recurrent neural nets so that it can keep sequence of the sentence
+ - used to keep track of context that is not far behind
+
+
+5. LSTM
+ - Uses cell states
+ - can be bidirectional so that you can relate meanings from the front of the sentence to the back and the other way around also
+ - you can stack LSTM layers so that outputs of on layer gets fed in to another layer - have to set      	"return_sequence=True" for this
+ - tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64))
+
+
+6. Generating text
+ - don't need a validation set
+ - tokenize all words
+ - change them to training data 
+ - want to train a model to predict the likely next word
+ eg) When you see this word this word is next, when you see this word these words should come after...
+ - max
+ - pads all sentences to 0 at first.
+ - then it uses the first word it sees as x and the next word is the thing we want to predict
+ - after it predicts the next word then the first two words are used as x and the next word is what we want to predict
+ - so and so
+
+
+
+
+
+
+
+
+
+
+
+
